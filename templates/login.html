@@ -38,26 +38,27 @@
 			e.preventDefault();
 		username = $("input[name='username']").val();
 		password = $("input[name='password']").val();
+		console.log(username);
+		console.log(password);
 		$.ajax({
 			  type : 'POST',
 			  url : "{{url_for('login')}}",
 			  contentType: 'application/json;charset=UTF-8',
 			  data : JSON.stringify({"username": username, "password": password}),
-			  success: function(res){
-			  	// console.log(res.username);
-			  	// console.log(res.password);
-			  	$("#iden").val(res.username);
+			 success: function(res){
+				  $("#iden").text(res.message);
+				  setTimeout(function() { window.location.href='{{url_for("index")}}'}, 3000);
 			  }
 			});
 	 	});
 	});
+
 </script>
 
 	<div class="limiter">
 		<div class="container-login100">
-			<input id = "iden"/> 
 			<div class="wrap-login100 p-t-85 p-b-20">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="post">
 					<span class="login100-form-title p-b-70">
 						Welcome
 					</span>
@@ -75,6 +76,7 @@
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 
+					<label id = "iden"></label> 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" id = "login-btn" >
 							Login
@@ -97,7 +99,7 @@
 								Don’t have an account?
 							</span>
 
-							<a href="#" class="txt2">
+							<a href="{{ url_for('register')}}" class="txt2">
 								Sign up
 							</a>
 						</li>
