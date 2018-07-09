@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V6</title>
+	<title>Greety Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -25,7 +25,10 @@
 <!--===============================================================================================-->
 	<script src="{{ url_for ('static' , filename = 'login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 <!--===============================================================================================-->
+	<script src = "{{ url_for ('static', filename = 'login/js/sha256.js') }}"></script>
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'login/css/util.css') }}">
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'login/css/main.css') }}">
 <!--===============================================================================================-->
 </head>
@@ -38,15 +41,14 @@
 			e.preventDefault();
 		username = $("input[name='username']").val();
 		password = $("input[name='password']").val();
-		console.log(username);
-		console.log(password);
+				
 		$.ajax({
 			  type : 'POST',
 			  url : "{{url_for('login')}}",
 			  contentType: 'application/json;charset=UTF-8',
-			  data : JSON.stringify({"username": username, "password": password}),
+			  data : JSON.stringify({"username": username, "password": sha256(password)}),
 			 success: function(res){
-				  $("#iden").text(res.message);
+			 	  $("#iden").text(res.message);
 				  setTimeout(function() { window.location.href='{{url_for("index")}}'}, 3000);
 			  }
 			});

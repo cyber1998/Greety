@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V6</title>
+	<title>Greety Registration/title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -25,7 +25,10 @@
 <!--===============================================================================================-->
 	<script src="{{ url_for ('static' , filename = 'login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 <!--===============================================================================================-->
+	<script src = "{{ url_for ('static', filename = 'login/js/sha256.js') }}"></script>
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'login/css/util.css') }}">
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'login/css/main.css') }}">
 <!--===============================================================================================-->
 </head>
@@ -49,7 +52,7 @@
 			  type : 'POST',
 			  url : "{{url_for('register')}}",
 			  contentType: 'application/json;charset=UTF-8',
-			  data : JSON.stringify({"email": email, "password": password1,"firstname" : first, "lastname": last}),
+			  data : JSON.stringify({"email": email, "password": sha256(password1),"firstname" : first, "lastname": last}),
 			  success: function(res){
 			   	$("#reg-response").html(res.response);
 			  }
