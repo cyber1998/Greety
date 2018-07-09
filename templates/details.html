@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Greety Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->  
+    <link rel="icon" type="image/png" href="{{ url_for ('static', filename = 'login/images/icons/favicon.ico') }}"/>
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename = 'login/vendor/bootstrap/css/bootstrap.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename = 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename = 'login/fonts/iconic/css/material-design-iconic-font.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static' , filename = 'login/vendor/animate/animate.css') }}">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static' , filename = 'login/vendor/css-hamburgers/hamburgers.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static' , filename = 'login/vendor/animsition/css/animsition.min.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename = 'login/vendor/select2/select2.min.css') }}">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='login/vendor/daterangepicker/daterangepicker.css') }}">
+<!--===============================================================================================-->
+    <script src="{{ url_for ('static' , filename = 'login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+<!--===============================================================================================-->
+    <script src = "{{ url_for ('static', filename = 'login/js/sha256.js') }}"></script>
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'login/css/util.css') }}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'login/css/main.css') }}">
+<!--===============================================================================================-->
+</head>
+<body>
+<!-- <script>
+    $(document).ready(function(){
+        $("#eventtype").val() = $.getJSON("{{ url_for('add_details') }}");
+        $("#eventdate").val() = //some value;
+        letter = $("#letter_of_love").val();
+        $.ajax({
+              type : 'POST',
+              url : "{{url_for('manage_event')}}",
+              contentType: 'application/json;charset=UTF-8',
+              data : JSON.stringify({"event" : eventtype, "date" : eventdate, }),
+             success: function(res){
+                  $("#iden").text(res.message);
+                  setTimeout(function() { window.location.href='{{url_for("index")}}'}, 3000);
+              }
+            });
+        });
+    });
+
+</script> -->
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-t-85 p-b-20">
+                <form class="login100-form validate-form" method="post">
+                    <span class="login100-form-title p-b-70">
+                        Cook up some beautiful words here! Be as expressive as possible. It shows your care! :)
+                    </span>
+
+                     <div class = "form-group">
+                        <div class="wrap-input100 m-t-85 m-b-35">
+                           <label> Event type </label> <input class="input100 form-control" type="text" id="eventtype" readonly="true">
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+
+
+                     <div class = "form-group">
+                        <div class="wrap-input100 m-t-85 m-b-35">
+                           <label> Date </label> <input class="input100 form-control" type="date" id="eventdate" readonly="true">
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+
+
+                    <div class = "form-group">
+                        <div class="wrap-textarea100 m-t-85 m-b-35">
+                            <textarea class="input100-textarea form-control" id="letter_of_love"></textarea>
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+
+                     <div class = "form-group">
+                        <div class="wrap-input100 m-t-85 m-b-35">
+                             <label> Want to send a video or an audio recording? Choose a prerecorded media here! </label>
+                            <input class="input100 form-control" type="file" id="videoclip">
+                            <span class="focus-input100"></span>
+                            <label class="text text-primary"> File size <b>must</b> be under 30 mb </label> 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="container-login100-form-btn">
+                            <button class="btn btn-dark" id = "schedule-btn" >
+                            Schedule it!
+                            </button>
+                        </div>
+                         <div class="container-login100-form-btn">
+                            <a href = "{{ url_for ('index') }}">
+                                <button class="btn btn-dark" id = "back-btn">
+                                    Take me back.
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="dropDownSelect1"></div>
+    
+<!--===============================================================================================-->
+
+<!--===============================================================================================-->
+    <script src="{{ url_for ('static' , filename = 'login/vendor/animsition/js/animsition.min.js') }}"></script>
+<!--===============================================================================================-->
+    <script src="{{ url_for ('static', filename = 'login/vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ url_for ('static', filename = 'login/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<!--===============================================================================================-->
+    <script src="{{ url_for ('static', filename = 'login/vendor/select2/select2.min.js') }}"></script>
+<!--===============================================================================================-->
+    <script src="{{ url_for ('static', filename = 'login/vendor/daterangepicker/moment.min.js') }}"></script>
+    <script src="{{ url_for ('static', filename = 'login/vendor/daterangepicker/daterangepicker.js') }}"></script>
+<!--===============================================================================================-->
+    <script src="{{ url_for ('static', filename = 'login/vendor/countdowntime/countdowntime.js') }}"></script>
+<!--===============================================================================================-->
+    <script src="{{ url_for ('static', filename = 'login/js/main.js') }}"></script>
+
+</body>
+</html>

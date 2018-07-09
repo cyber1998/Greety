@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V6</title>
+	<title>Greety Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -25,7 +25,10 @@
 <!--===============================================================================================-->
 	<script src="{{ url_for ('static' , filename = 'login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 <!--===============================================================================================-->
+	<script src = "{{ url_for ('static', filename = 'login/js/sha256.js') }}"></script>
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'login/css/util.css') }}">
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'login/css/main.css') }}">
 <!--===============================================================================================-->
 </head>
@@ -38,26 +41,26 @@
 			e.preventDefault();
 		username = $("input[name='username']").val();
 		password = $("input[name='password']").val();
+				
 		$.ajax({
 			  type : 'POST',
 			  url : "{{url_for('login')}}",
 			  contentType: 'application/json;charset=UTF-8',
-			  data : JSON.stringify({"username": username, "password": password}),
-			  success: function(res){
-			  	// console.log(res.username);
-			  	// console.log(res.password);
-			  	$("#iden").val(res.username);
+			  data : JSON.stringify({"username": username, "password": sha256(password)}),
+			 success: function(res){
+			 	  $("#iden").text(res.message);
+				  setTimeout(function() { window.location.href='{{url_for("index")}}'}, 3000);
 			  }
 			});
 	 	});
 	});
+
 </script>
 
 	<div class="limiter">
 		<div class="container-login100">
-			<input id = "iden"/> 
 			<div class="wrap-login100 p-t-85 p-b-20">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="post">
 					<span class="login100-form-title p-b-70">
 						Welcome
 					</span>
@@ -75,6 +78,7 @@
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 
+					<label id = "iden"></label> 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" id = "login-btn" >
 							Login
@@ -97,7 +101,7 @@
 								Don’t have an account?
 							</span>
 
-							<a href="#" class="txt2">
+							<a href="{{ url_for('register')}}" class="txt2">
 								Sign up
 							</a>
 						</li>
