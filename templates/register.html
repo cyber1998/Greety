@@ -44,6 +44,11 @@
 		first = $("input[name='firstname']").val();
 		last = $("input[name='lastname']").val();
 
+		if(password1.length()<8) {
+			alert("Please enter a password which has atleast 8 characters");
+			exit();
+		}
+
 		if ( password1 !== password2){
 			alert("Passwords don't match.");
 			exit();

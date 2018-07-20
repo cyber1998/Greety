@@ -79,12 +79,13 @@ def register():
 
 @app.route('/manage/event/add', methods=['GET', 'POST'])
 def manage_event():
-     if request.method == 'POST':
+# Manage the event
+if request.method == 'POST':
         if 'username' in session:
             email = session['username']
         try:
-            event_type = request.json['event']
-            date = request.json['date']
+            event_type = session['event']
+            date = session['date']
             client = MongoClient('localhost', 27017)
             db = client['greetydb']
             coll = db['events']
@@ -95,21 +96,25 @@ def manage_event():
             return jsonify(message = "Event not added. Please try again")
         else:
             return jsonify(message = "Please login to add events")
+     
     
-    # Manage the event
     
 @app.route('/manage/event/', methods=['GET', 'POST'])
 def add_details():
 
     if request.method == 'GET':
-        return render_template("details.html")
+        session['date'] = request.json['date']
+        session['event'] = request.json['event']
+        return render_template('details.html')
+
+    
       
-    if request.method == 'POST':
-        if 'username' in session:
-            email = session['username']
-        else:
-            return redirect('/')
-        return jsonify(date = request.json['date'], event_type = request.json['event'])
+    # if request.method == 'POST':
+    #     if 'username' in session:
+    #         email = session['username']
+    #     else:
+    #         return redirect('/')
+    #     return jsonify(date = request.json['date'], event_type = request.json['event'])
 
 
 @app.route('/logout')

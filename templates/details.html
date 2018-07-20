@@ -33,11 +33,11 @@
 <!--===============================================================================================-->
 </head>
 <body>
-<!-- <script>
+<script>
     $(document).ready(function(){
-        $("#eventtype").val() = $.getJSON("{{ url_for('add_details') }}");
-        $("#eventdate").val() = //some value;
         letter = $("#letter_of_love").val();
+        date = $("#eventdate").val();
+        
         $.ajax({
               type : 'POST',
               url : "{{url_for('manage_event')}}",
@@ -51,7 +51,7 @@
         });
     });
 
-</script> -->
+</script>
 
     <div class="limiter">
         <div class="container-login100">
@@ -63,7 +63,7 @@
 
                      <div class = "form-group">
                         <div class="wrap-input100 m-t-85 m-b-35">
-                           <label> Event type </label> <input class="input100 form-control" type="text" id="eventtype" readonly="true">
+                           <label> Event type </label> {% if event_type %}<input class="input100 form-control" type="text" value = "{{ event_type }}" id="eventtype" readonly="true">{% endif %}
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
 
                      <div class = "form-group">
                         <div class="wrap-input100 m-t-85 m-b-35">
-                           <label> Date </label> <input class="input100 form-control" type="date" id="eventdate" readonly="true">
+                           <label> Date </label>{% if date %}<input class="input100 form-control" type="date" value = "{{ date }}" id="eventdate" readonly="true"> {% endif %}
                             <span class="focus-input100"></span>
                         </div>
                     </div>
